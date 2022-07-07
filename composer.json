@@ -1,0 +1,48 @@
+{
+  "name": "dodecastudio/craft-feedreader",
+  "description": "A simple plugin to load and display RSS and Atom feeds in twig templates.",
+  "type": "craft-plugin",
+  "version": "1.0.0",
+  "license": "proprietary",
+  "keywords": [
+    "craft",
+    "cms",
+    "craftcms",
+    "craft-plugin",
+    "feedreader",
+    "feeds",
+    "rss",
+    "atom",
+    "data"
+  ],
+  "support": {
+    "source": "https://github.com/dodecastudio/craft-feedreader",
+    "docs": "https://github.com/dodecastudio/craft-feedreader/blob/main/README.md",
+    "issues": "https://github.com/dodecastudio/craft-feedreader/issues"
+  },
+  "authors": [
+    {
+      "name": "Dodeca Studio",
+      "homepage": "https://dodeca.studio"
+    }
+  ],
+  "require": {
+    "php": ">=7.4",
+    "craftcms/cms": "^3.0|^4.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "dodecastudio\\feedreader\\": "src/"
+    }
+  },
+  "extra": {
+    "treeware": {},
+    "name": "FeedReader",
+    "handle": "feedreader",
+    "developer": "Dodeca Studio",
+    "developerUrl": "https://dodeca.studio",
+    "documentationUrl": "https://github.com/dodecastudio/craft-feedreader/blob/main/README.md",
+    "changelogUrl": "https://github.com/dodecastudio/craft-feedreader/blob/main/CHANGELOG.md",
+    "class": "dodecastudio\\feedreader\\FeedReader"
+  }
+}
