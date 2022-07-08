@@ -25,6 +25,11 @@ return [
    * 
    */
   'cacheDuration' => 86400,
+
+  /**
+   * @var int The default number of feed items to return.
+   * 
+   */
   'limit' => 20,
 
 ];
