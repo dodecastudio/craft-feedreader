@@ -11,6 +11,8 @@
 namespace dodecastudio\feedreader\variables;
 
 use dodecastudio\feedreader\FeedReader;
+use dodecastudio\feedreader\vendor\feeds\Feeds;
+use dodecastudio\feedreader\vendor\feeds\GuzzleClient as FeedReaderGuzzleClient;
 
 use Craft;
 use Twig\Markup;
@@ -18,29 +20,30 @@ use Twig\Markup;
 class FeedReaderVariable
 {
 
-  public function get(String $url = '', Int $cacheDuration = 0)
+  public function getFeed(String $url = '', Int $cacheDuration = 0)
   {
 		// Get settings
 		$settings = FeedReader::getInstance()->getSettings();
 		$cacheDuration = $cacheDuration > 0 ? $cacheDuration : $settings['cacheDuration'];
-
+		$Feeds = new Feeds();
 		try {
-			return Craft::$app->feeds->getFeed($url, $cacheDuration);
-		} catch (\GuzzleHttp\Exception\ClientException $e) {
+			return $Feeds->getFeed($url, $cacheDuration);
+		} catch (\FeedReaderGuzzleClient\GuzzleHttp\Exception\ClientException $e) {
 			return false;
 		}
   }
 
-  public function getItems(String $url = '', Int $limit = 0, Int $offset = 0, Int $cacheDuration = 0)
+  public function getFeedItems(String $url = '', Int $limit = 0, Int $offset = 0, Int $cacheDuration = 0)
   {
 		// Get settings
 		$settings = FeedReader::getInstance()->getSettings();
 		$cacheDuration = $cacheDuration > 0 ? $cacheDuration : $settings['cacheDuration'];
+		$Feeds = new Feeds();
 		$limit = $limit > 0 ? $limit : $settings['limit'];
 
 		try {
-			return Craft::$app->feeds->getFeedItems($url, $limit, $offset, $cacheDuration);
-		} catch (\GuzzleHttp\Exception\ClientException $e) {
+			return $Feeds->getFeedItems($url, $limit, $offset, $cacheDuration);
+		} catch (\FeedReaderGuzzleClient\GuzzleHttp\Exception\ClientException $e) {
 			return false;
 		}
   }

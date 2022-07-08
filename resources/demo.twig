@@ -23,7 +23,7 @@
                 <h4>Input</h4>
 
                 <pre><code>&lcub;# Fetch an RSS feed #&rcub;
-&lcub;% set newsFeed = craft.feedreader.get("http://feeds.bbci.co.uk/news/uk/rss.xml", 43200) %&rcub;
+&lcub;% set newsFeed = craft.feedreader.getFeed("http://feeds.bbci.co.uk/news/uk/rss.xml", 43200) %&rcub;
 
 &lcub;% if newsFeed %&rcub;
     &lcub;# Output feed info #&rcub;
@@ -44,7 +44,7 @@
                 <h4>Output</h4>
 
                 {# Fetch an RSS feed #}
-                {% set newsFeed = craft.feedreader.get("http://feeds.bbci.co.uk/news/uk/rss.xml", 1000) %}
+                {% set newsFeed = craft.feedreader.getFeed("http://feeds.bbci.co.uk/news/uk/rss.xml", 1000) %}
 
                 {% if newsFeed %}
                     {# Output feed info #}
@@ -54,7 +54,7 @@
                     <ul>
                         {% for newsItem in newsFeed.items %}
                             <li>
-                                <a href="{{ newsItem.permalink }}">{{ newsItem.title }}</a> - {{ newsItem.date.date|date("Y-m-d H:i:s") }}
+                                <a href="{{ newsItem.permalink }}">{{ newsItem.title }}</a> - {{ newsItem.date|date("Y-m-d H:i:s") }}
                             </li>
                         {% endfor %}
                     </ul>
@@ -70,7 +70,7 @@
                 <h4>Input</h4>
 
                 <pre><code>&lcub;# Fetch an RSS feed's items #&rcub;
-&lcub;% set newsFeedItems = craft.feedreader.getItems("http://feeds.bbci.co.uk/news/uk/rss.xml", 10, 10, 43200) %&rcub;
+&lcub;% set newsFeedItems = craft.feedreader.getFeedItems("http://feeds.bbci.co.uk/news/uk/rss.xml", 10, 10, 43200) %&rcub;
 
 &lcub;# Output the feed items #&rcub;
 &lcub;% if newsFeedItems %&rcub;
@@ -88,14 +88,14 @@
                 <h4>Output</h4>
 
                 {# Fetch an RSS feed's items #}
-                {% set newsFeedItems = craft.feedreader.getItems("http://feeds.bbci.co.uk/news/uk/rss.xml", 10, 10, 1000) %}
+                {% set newsFeedItems = craft.feedreader.getFeedItems("http://feeds.bbci.co.uk/news/uk/rss.xml", 10, 10, 1000) %}
 
                 {# Output the feed items #}
                 {% if newsFeedItems %}
                     <ul>
                         {% for newsItem in newsFeedItems %}
                             <li>
-                                <a href="{{ newsItem.permalink }}">{{ newsItem.title }}</a> - {{ newsItem.date.date|date("Y-m-d H:i:s") }}
+                                <a href="{{ newsItem.permalink }}">{{ newsItem.title }}</a> - {{ newsItem.date|date("Y-m-d H:i:s") }}
                             </li>
                         {% endfor %}
                     </ul>

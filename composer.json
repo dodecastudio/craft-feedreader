@@ -2,7 +2,7 @@
   "name": "dodecastudio/craft-feedreader",
   "description": "A simple plugin to load and display RSS and Atom feeds in twig templates.",
   "type": "craft-plugin",
-  "version": "1.0.0",
+  "version": "0.9.0-beta",
   "license": "proprietary",
   "keywords": [
     "craft",
@@ -28,7 +28,9 @@
   ],
   "require": {
     "php": ">=7.4",
-    "craftcms/cms": "^3.0|^4.0"
+    "craftcms/cms": "^3.0|^4.0",
+    "laminas/laminas-feed": ">=2.17.0",
+    "guzzlehttp/guzzle": "^7.2.0"
   },
   "autoload": {
     "psr-4": {

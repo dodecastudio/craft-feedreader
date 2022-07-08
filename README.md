@@ -25,7 +25,7 @@ Install the plugin as follows:
 
 ## Overview
 
-The FeedReader plugin makes use of Craft's built-in [Feeds API](https://docs.craftcms.com/api/v3/craft-feeds-feeds.html) to load and display RSS or Atom feeds directly in templates.
+The FeedReader plugin makes use of Craft's built-in [Feeds API](https://docs.craftcms.com/api/v3/craft-feeds-feeds.html) to load and display RSS or Atom feeds directly in templates. As the Feeds API was deprecated in Craft 4, it borrows the original code from Craft 3.
 
 ## Using FeedReader
 
@@ -55,7 +55,7 @@ You can then output information about the feed and the items it contains, like s
 
 #### Supported parameters
 
-The parameters available for the `get` variable are:
+The parameters available for the `getFeed` variable are:
 
 | Parameter        | Type     | Default | Description                                                                                                                             |
 | ---------------- | -------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------- |
