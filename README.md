@@ -34,7 +34,7 @@ The FeedReader plugin makes use of Craft's built-in [Feeds API](https://docs.cra
 The `get` variable will fetch a feed and return feed information and feed items as an array.
 
 ```twig
-{% set newsFeed = craft.feedreader.get("http://feeds.bbci.co.uk/news/uk/rss.xml", 43200) %}
+{% set newsFeed = craft.feedreader.getFeed("http://feeds.bbci.co.uk/news/uk/rss.xml", 43200) %}
 ```
 
 You can then output information about the feed and the items it contains, like so:
@@ -67,7 +67,7 @@ The parameters available for the `getFeed` variable are:
 If you don't need feed information and would like a little bit more control over the feed items, then the `getItems` variable will fetch feed items and return them as an array.
 
 ```twig
-{% set newsFeedItems = craft.feedreader.getItems("http://feeds.bbci.co.uk/news/uk/rss.xml", 10, 10, 1000) %}
+{% set newsFeedItems = craft.feedreader.getFeedItems("http://feeds.bbci.co.uk/news/uk/rss.xml", 10, 10, 1000) %}
 ```
 
 You can then output the items, like so:
