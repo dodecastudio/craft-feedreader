@@ -25,7 +25,7 @@ Install the plugin as follows:
 
 ## Overview
 
-The FeedReader plugin makes use of Craft's built-in [Feeds API](https://docs.craftcms.com/api/v3/craft-feeds-feeds.html) to load and display RSS or Atom feeds directly in templates. As the Feeds API was deprecated in Craft 4, it borrows the original code from Craft 3.
+The FeedReader plugin makes use of Craft's built-in [Feeds API](https://docs.craftcms.com/api/v3/craft-feeds-feeds.html) to load and display RSS or Atom feeds directly in templates. As the Feeds API was deprecated in Craft 4, this plugin borrows the original code from Craft 3 in order to ensure function across both these versions of Craft.
 
 ## Using FeedReader
 
