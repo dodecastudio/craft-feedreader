@@ -46,9 +46,9 @@ You can then output information about the feed and the items it contains, like s
 {# Output the feed items #}
 <ul>
 {% for newsItem in newsFeed.items %}
-	<li>
-  	<a href="{{ newsItem.permalink }}">{{ newsItem.title }}</a> - {{ newsItem.date.date|date("Y-m-d H:i:s") }}
-	</li>
+  <li>
+    <a href="{{ newsItem.permalink }}">{{ newsItem.title }}</a> - {{ newsItem.date.date|date("Y-m-d H:i:s") }}
+  </li>
 {% endfor %}
 </ul>
 ```
@@ -76,9 +76,9 @@ You can then output the items, like so:
 {# Output the feed items #}
 <ul>
 {% for newsItem in newsFeedItems %}
-	<li>
-		<a href="{{ newsItem.permalink }}">{{ newsItem.title }}</a> - {{ newsItem.date.date|date("Y-m-d H:i:s") }}
-	</li>
+  <li>
+    <a href="{{ newsItem.permalink }}">{{ newsItem.title }}</a> - {{ newsItem.date.date|date("Y-m-d H:i:s") }}
+  </li>
 {% endfor %}
 </ul>
 ```
