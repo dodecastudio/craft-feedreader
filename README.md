@@ -15,11 +15,11 @@ Install the plugin as follows:
 
 1.  Open your terminal and go to your Craft project:
 
-        cd /path/to/project
+        `cd /path/to/project`
 
 2.  Then tell Composer to load the plugin:
 
-        composer require dodecastudio/craft-feedreader
+        `composer require dodecastudio/craft-feedreader`
 
 3.  In the Control Panel, go to Settings → Plugins and click the “Install” button for FeedReader.
 
@@ -64,7 +64,7 @@ The parameters available for the `getFeed` variable are:
 
 ### Fetching feed items
 
-If you don't need feed information and would like a little bit more control over the feed items, then the `getItems` variable will fetch feed items and return them as an array.
+If you don't need feed information and would like a little bit more control over the feed items, then the `getFeedItems` variable will fetch feed items and return them as an array.
 
 ```twig
 {% set newsFeedItems = craft.feedreader.getFeedItems("http://feeds.bbci.co.uk/news/uk/rss.xml", 10, 10, 1000) %}
@@ -85,7 +85,7 @@ You can then output the items, like so:
 
 #### Supported parameters
 
-The parameters available for the `getItems` variable are:
+The parameters available for the `getFeedItems` variable are:
 
 | Parameter        | Type     | Default | Description                                                                                                                             |
 | ---------------- | -------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------- |

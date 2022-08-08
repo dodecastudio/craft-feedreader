@@ -3,3 +3,7 @@
 ## 1.0.0
 
 - Initial release
+
+## 0.9.0-beta1
+
+- Pre-release
