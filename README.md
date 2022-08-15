@@ -1,7 +1,5 @@
 # FeedReader plugin for Craft CMS
 
-[![Buy us a tree](https://img.shields.io/badge/Treeware-%F0%9F%8C%B3-lightgreen)](https://plant.treeware.earth/dodecastudio/craft-feedreader)
-
 <img src="src/icon.svg" width="128" height="128" />
 
 ## Requirements
