@@ -29,7 +29,7 @@ The FeedReader plugin makes use of Craft's built-in [Feeds API](https://docs.cra
 
 ### Fetching a feed
 
-The `get` variable will fetch a feed and return feed information and feed items as an array.
+The `getFeed` variable will fetch a feed and return feed information and feed items as an array.
 
 ```twig
 {% set newsFeed = craft.feedreader.getFeed("http://feeds.bbci.co.uk/news/uk/rss.xml", 43200) %}
