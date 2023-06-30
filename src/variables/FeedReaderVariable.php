@@ -20,20 +20,20 @@ use Twig\Markup;
 class FeedReaderVariable
 {
 
-  public function getFeed(String $url = '', Int $cacheDuration = 0)
+  public function getFeed(String $url = '', Int $cacheDuration = 0, Bool $normalize = true)
   {
 		// Get settings
 		$settings = FeedReader::getInstance()->getSettings();
 		$cacheDuration = $cacheDuration > 0 ? $cacheDuration : $settings['cacheDuration'];
 		$Feeds = new Feeds();
 		try {
-			return $Feeds->getFeed($url, $cacheDuration);
+			return $Feeds->getFeed($url, $cacheDuration, $normalize);
 		} catch (\FeedReaderGuzzleClient\GuzzleHttp\Exception\ClientException $e) {
 			return false;
 		}
   }
 
-  public function getFeedItems(String $url = '', Int $limit = 0, Int $offset = 0, Int $cacheDuration = 0)
+  public function getFeedItems(String $url = '', Int $limit = 0, Int $offset = 0, Int $cacheDuration = 0, Bool $normalize = true)
   {
 		// Get settings
 		$settings = FeedReader::getInstance()->getSettings();
@@ -42,7 +42,7 @@ class FeedReaderVariable
 		$limit = $limit > 0 ? $limit : $settings['limit'];
 
 		try {
-			return $Feeds->getFeedItems($url, $limit, $offset, $cacheDuration);
+			return $Feeds->getFeedItems($url, $limit, $offset, $cacheDuration, $normalize);
 		} catch (\FeedReaderGuzzleClient\GuzzleHttp\Exception\ClientException $e) {
 			return false;
 		}

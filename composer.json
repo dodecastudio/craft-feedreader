@@ -2,7 +2,7 @@
   "name": "dodecastudio/craft-feedreader",
   "description": "A simple plugin to load and display RSS and Atom feeds in Craft CMS templates.",
   "type": "craft-plugin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "proprietary",
   "keywords": [
     "craft",

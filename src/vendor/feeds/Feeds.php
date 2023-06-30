@@ -82,10 +82,10 @@ class Feeds extends Component
      * @throws InvalidConfigException
      * @since 3.0.37
      */
-    public function getFeed(string $url, int $cacheDuration = null): array
+    public function getFeed(string $url, int $cacheDuration = null, bool $normalize = true): array
     {
-        // Key based on the classname, url, limit and offset.
-        $key = md5(self::class . '.' . $url);
+        // Key based on the classname, url and normalize.
+        $key = md5(self::class . '.' . $url . '.' . $normalize);
 
         // See if we have this cached already.
         if (($cached = Craft::$app->getCache()->get($key)) !== false) {
@@ -119,7 +119,7 @@ class Feeds extends Component
             'description' => $feed->getDescription(),
             'generator' => $feed->getGenerator(),
             'id' => $feed->getId(),
-            'items' => $this->_getFeedItems($feed),
+            'items' => $this->_getFeedItems($feed, $normalize),
             'language' => $feed->getLanguage(),
             'link' => $feed->getLink(),
             'title' => $feed->getTitle(),
@@ -186,9 +186,9 @@ class Feeds extends Component
      * @throws InvalidConfigException
      * @throws MissingComponentException
      */
-    public function getFeedItems(string $url, int $limit = null, int $offset = null, int $cacheDuration = null): array
+    public function getFeedItems(string $url, int $limit = null, int $offset = null, int $cacheDuration = null, bool $normalize = true ): array
     {
-        $items = $this->getFeed($url, $cacheDuration)['items'];
+        $items = $this->getFeed($url, $cacheDuration, $normalize)['items'];
 
         if ($limit === 0) {
             $items = array_slice($items, $offset);
@@ -205,43 +205,56 @@ class Feeds extends Component
      * @param FeedInterface $feed
      * @return array
      */
-    private function _getFeedItems(FeedInterface $feed): array
+    private function _getFeedItems(FeedInterface $feed, bool $normalize = true): array
     {
         $items = [];
         $timezone = new \DateTimeZone(Craft::$app->getTimeZone());
 
         foreach ($feed as $item) {
             /** @var EntryInterface $item */
-            // Validate the permalink
-            $permalink = $item->getPermalink();
 
-            if ($permalink) {
-                $urlModel = new Url();
-                $urlModel->url = $permalink;
+            // Return all nodes with normalization
+            if ($normalize) {
+                // Validate the permalink
+                $permalink = $item->getPermalink();
 
-                if (!$urlModel->validate()) {
-                    Craft::info('An item was omitted from the feed (' . $feed->getFeedLink() . ') because its permalink was an invalid URL: ' . $permalink, __METHOD__);
-                    continue;
+                if ($permalink) {
+                    $urlModel = new Url();
+                    $urlModel->url = $permalink;
+
+                    if (!$urlModel->validate()) {
+                        Craft::info('An item was omitted from the feed (' . $feed->getFeedLink() . ') because its permalink was an invalid URL: ' . $permalink, __METHOD__);
+                        continue;
+                    }
+
+                    $date = $item->getDateCreated();
+                    $dateUpdated = $item->getDateModified();
+        
+                    $items[] = [
+                        'authors' => $this->_getItemAuthors($item->getAuthors()),
+                        'categories' => $this->_getItemCategories($item->getCategories()),
+                        'content' => $item->getContent(),
+                        // See: https://github.com/zendframework/zendframework/issues/2969
+                        // and https://github.com/zendframework/zendframework/pull/3570
+                        'contributors' => $this->_getItemAuthors($item->getAuthors()),
+                        'date' => $date ? $date->setTimezone($timezone) : null,
+                        'dateUpdated' => $dateUpdated ? $dateUpdated->setTimezone($timezone) : null,
+                        'permalink' => $item->getPermalink(),
+                        'summary' => $item->getDescription(),
+                        'title' => $item->getTitle(),
+                        'enclosures' => $item->getEnclosure(),
+                    ];
                 }
+
+            // Return all nodes without normalization
+            } else {
+                $itemnodes = [];
+                foreach ($item->getElement()->childNodes as $child) {
+                    $itemnodes[$child->nodeName] = $child->nodeValue;
+                }
+                $items[] = $itemnodes;
+
             }
-
-            $date = $item->getDateCreated();
-            $dateUpdated = $item->getDateModified();
-
-            $items[] = [
-                'authors' => $this->_getItemAuthors($item->getAuthors()),
-                'categories' => $this->_getItemCategories($item->getCategories()),
-                'content' => $item->getContent(),
-                // See: https://github.com/zendframework/zendframework/issues/2969
-                // and https://github.com/zendframework/zendframework/pull/3570
-                'contributors' => $this->_getItemAuthors($item->getAuthors()),
-                'date' => $date ? $date->setTimezone($timezone) : null,
-                'dateUpdated' => $dateUpdated ? $dateUpdated->setTimezone($timezone) : null,
-                'permalink' => $item->getPermalink(),
-                'summary' => $item->getDescription(),
-                'title' => $item->getTitle(),
-                'enclosures' => $item->getEnclosure(),
-            ];
         }
 
         return $items;

@@ -32,7 +32,7 @@ The FeedReader plugin makes use of Craft's built-in [Feeds API](https://docs.cra
 The `getFeed` variable will fetch a feed and return feed information and feed items as an array.
 
 ```twig
-{% set newsFeed = craft.feedreader.getFeed("http://feeds.bbci.co.uk/news/uk/rss.xml", 43200) %}
+{% set newsFeed = craft.feedreader.getFeed("http://feeds.bbci.co.uk/news/uk/rss.xml", 43200, true) %}
 ```
 
 You can then output information about the feed and the items it contains, like so:
@@ -55,17 +55,18 @@ You can then output information about the feed and the items it contains, like s
 
 The parameters available for the `getFeed` variable are:
 
-| Parameter        | Type     | Default | Description                                                                                                                             |
-| ---------------- | -------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| `url`            | `String` |         | The URL of the feed being loaded.                                                                                                       |
-| `cacheDuraction` | `Int`    | 86400   | The duration in seconds for which to cache the feed result. The default of 86400 can be overridden using a custom settings config file. |
+| Parameter        | Type      | Default | Description                                                                                                                             |
+| ---------------- | --------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `url`            | `String`  |         | The URL of the feed being loaded.                                                                                                       |
+| `cacheDuraction` | `Int`     | 86400   | The duration in seconds for which to cache the feed result. The default of 86400 can be overridden using a custom settings config file. |
+| `normalize`      | `Boolean` | true    | Whether or not to "normalize" the data returned for each item or entry. This is helpful when non-standard data is being returned.       |
 
 ### Fetching feed items
 
 If you don't need feed information and would like a little bit more control over the feed items, then the `getFeedItems` variable will fetch feed items and return them as an array.
 
 ```twig
-{% set newsFeedItems = craft.feedreader.getFeedItems("http://feeds.bbci.co.uk/news/uk/rss.xml", 10, 10, 1000) %}
+{% set newsFeedItems = craft.feedreader.getFeedItems("http://feeds.bbci.co.uk/news/uk/rss.xml", 10, 10, 1000, true) %}
 ```
 
 You can then output the items, like so:
@@ -85,12 +86,13 @@ You can then output the items, like so:
 
 The parameters available for the `getFeedItems` variable are:
 
-| Parameter        | Type     | Default | Description                                                                                                                             |
-| ---------------- | -------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| `url`            | `String` |         | The URL of the feed being loaded.                                                                                                       |
-| `limit`          | `Int`    | 20      | The number of feed items to return.                                                                                                     |
-| `offset`         | `Int`    | 0       | The starting index of the item from which to start the returned feed items.                                                             |
-| `cacheDuraction` | `Int`    | 86400   | The duration in seconds for which to cache the feed result. The default of 86400 can be overridden using a custom settings config file. |
+| Parameter        | Type      | Default | Description                                                                                                                             |
+| ---------------- | --------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `url`            | `String`  |         | The URL of the feed being loaded.                                                                                                       |
+| `limit`          | `Int`     | 20      | The number of feed items to return.                                                                                                     |
+| `offset`         | `Int`     | 0       | The starting index of the item from which to start the returned feed items.                                                             |
+| `cacheDuraction` | `Int`     | 86400   | The duration in seconds for which to cache the feed result. The default of 86400 can be overridden using a custom settings config file. |
+| `normalize`      | `Boolean` | true    | Whether or not to "normalize" the data returned for each item or entry. This is helpful when non-standard data is being returned.       |
 
 ## Plugin Settings
 
