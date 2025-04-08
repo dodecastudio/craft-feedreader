@@ -1,5 +1,9 @@
 # FeedReader Changelog
 
+## 2.0.1 - 2025-04-08
+
+- Fixed: Added a new catch Guzzle exception, resolves issue #4, prevents site-breaking errors when feeds are unavailable. Thanks to @smartpill for reporting this.
+
 ## 2.0.0 - 2024-04-22
 
 - Updated: Added support for Craft 5.

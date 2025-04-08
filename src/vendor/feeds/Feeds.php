@@ -104,6 +104,9 @@ class Feeds extends Component
         } catch (RuntimeException $e) {
             Craft::warning('There was a problem parsing the feed: ' . $e->getMessage(), __METHOD__);
             return [];
+        } catch (\GuzzleHttp\Exception\RequestException $e) {
+            Craft::warning('There was a Guzzle HTTP error: ' . $e->getMessage(), __METHOD__);
+            return [];
         }
 
         $timezone = new \DateTimeZone(Craft::$app->getTimeZone());
